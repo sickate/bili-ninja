@@ -1,0 +1,32 @@
+node_modules/
+.DS_Store
+artifacts/
+*.zip
+
+# Local credentials, accounts, and development settings are never source assets.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+.netrc
+.npmrc
+.aws/
+.ssh/
+.codex/
+.agents/
+.mcp.json
+credentials.json
+auth.json
+secrets.*
+
+# Media fixtures and local scan reports stay off GitHub.
+*.m4s
+*.m4a
+*.mp4
+*.aac
+gitleaks*.json
+__pycache__/
+*.pyc

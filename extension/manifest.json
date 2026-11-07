@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Bili Ninja · 音视频提取",
+  "version": "1.2.0",
+  "description": "提取 Bilibili 完整视频为含声音的 MP4，或将所选分 P 的音频无损合并为一个 M4A。",
+  "minimum_chrome_version": "116",
+  "permissions": ["sidePanel", "scripting", "downloads", "declarativeNetRequestWithHostAccess"],
+  "host_permissions": ["https://*.bilibili.com/*", "https://*.bilivideo.com/*", "https://*.bilivideo.cn/*", "https://*.bilivideo.tv/*"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "side_panel": { "default_path": "audio.html" },
+  "icons": { "48": "icons/active-48.png", "128": "icons/active-128.png" },
+  "action": {
+    "default_title": "Bili Ninja · 请在 Bilibili 页面使用",
+    "default_icon": { "16": "icons/inactive-16.png", "32": "icons/inactive-32.png" }
+  }
+}
