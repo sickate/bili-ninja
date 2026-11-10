@@ -1,9 +1,10 @@
 {
   "manifest_version": 3,
   "name": "Bili Ninja · 音视频提取",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "提取 Bilibili 完整视频为含声音的 MP4，或将所选分 P 的音频无损合并为一个 M4A。",
   "minimum_chrome_version": "116",
+  "homepage_url": "https://github.com/sickate/bili-ninja",
   "permissions": ["sidePanel", "scripting", "downloads", "declarativeNetRequestWithHostAccess"],
   "host_permissions": ["https://*.bilibili.com/*", "https://*.bilivideo.com/*", "https://*.bilivideo.cn/*", "https://*.bilivideo.tv/*"],
   "background": { "service_worker": "background.js", "type": "module" },
