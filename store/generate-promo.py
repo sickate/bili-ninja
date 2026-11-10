@@ -1,4 +1,4 @@
-"""Render the original, text-free Chrome Web Store promo tile (requires rsvg-convert)."""
+"""Render a 24-bit Chrome Web Store promo tile (requires rsvg-convert and ImageMagick)."""
 from pathlib import Path
 import subprocess
 
@@ -30,4 +30,5 @@ svg = '''<svg xmlns="http://www.w3.org/2000/svg" width="440" height="280" viewBo
 </svg>'''
 output = OUT / "promo-440x280.png"
 subprocess.run(["rsvg-convert", "--output", str(output)], input=svg.encode(), check=True)
+subprocess.run(["magick", str(output), "-alpha", "off", "-strip", "-define", "png:color-type=2", str(output)], check=True)
 print(f"Created {output.name}")

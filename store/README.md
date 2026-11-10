@@ -1,6 +1,7 @@
 # Chrome Web Store submission materials
 
 - `listing-zh-CN.md`: store text, single-purpose statement, permissions explanations, and data-handling notes.
+- `review-instructions.md`: review steps that require no developer credentials.
 - `assets/icon-128.png`: 128 × 128 store icon.
 - `assets/promo-440x280.png`: original small promotional tile.
 - `assets/screenshot-audio-1280x800.png`: audio workflow with the actual extension UI and generated demonstration media.
