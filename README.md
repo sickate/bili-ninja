@@ -6,7 +6,7 @@
 
 下载界面显示在 Chrome 原生侧边栏，浏览视频时无需切换到新标签页。Bilibili 页面上的工具栏图标为粉色，其他网站为灰色且不可用。
 
-[隐私政策](PRIVACY.md) · [问题反馈](https://github.com/sickate/bili-ninja/issues)
+[隐私政策](PRIVACY.md) · [问题反馈](https://github.com/sickate/bili-ninja/issues) · [官网与推广计划](docs/promotion-plan.md)
 
 ## 安装
 
