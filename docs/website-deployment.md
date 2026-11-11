@@ -1,5 +1,32 @@
 # Instap 官网部署与验收
 
+## 实际发布结果（2026-11-12，Asia/Shanghai）
+
+以下是已执行结果；后文保留部署前调查与可复用操作流程，不代表所有人工验收均已完成。
+
+| 项目 | 结果 |
+| --- | --- |
+| 公司首页 / 产品页 | `https://www.instap.net/` / `https://www.instap.net/bili-ninja/` |
+| 线上代码提交 | `5adcf42d87e765cf5886b5dd1f798be4007934cd`，已推送至 origin/main |
+| 发布目录 | `/var/www/instap.net/releases/20261111T144444Z-5adcf42d87e7` |
+| 当前指向 | `/var/www/instap.net/current` → 上述版本目录 |
+| Nginx 配置 | `/etc/nginx/sites-available/instap.net`，同名 sites-enabled 软链 |
+| 备份 | `/var/backups/instap-20261111/`，包含发布前不存在标记、站点基线、HTTP 临时配置及原 www DNS 记录 |
+| www A | 已通过阿里云 CLI OAuth/API 从 `106.15.154.30` 更正为 `47.116.75.216`；原 default 线路、TTL 600 保留 |
+| DNS 验证 | maru 的权威响应包含 `aa` 且为新地址；最终本机普通 DNS 也已更新，无解析覆盖的线上验收通过 |
+| HTTPS | www 独立证书，SAN 仅 www.instap.net，到期时间 2027-02-09 14:49:25 UTC；TLS 校验未关闭 |
+| 扩展发布包 | v1.2.1，22,283 字节，SHA-256 `f35dd3c1542a266057ac3b24e46b4207059c84c10b0dbb8d08f235c9daf5a3ea` |
+| 下载地址 | `https://www.instap.net/downloads/bili-ninja/bili-ninja-1.2.1.zip` |
+| 线上校验 | 2026-11-11 16:06 UTC：五页及 14 项资源通过；实际 ZIP 内容、版本、大小、SHA-256、CRC 与本地扩展一致 |
+| HTTP 跳转 | 301 至 HTTPS，保留路径和 UTM 查询参数；ZIP 为 application/zip、attachment，使用版本化 immutable 缓存 |
+| 既有站点 | read-ai 200、reports 200、vellt 404，与部署前一致 |
+| 本地测试 | 扩展测试 22 通过、2 项真实样本跳过；来源传递/复制行为、隐私正文与发布回退检查通过 |
+| 远端 CI | GitHub 查询成功，该提交无 Actions 运行记录；未宣称 CI 通过 |
+
+本机原 DNS 缓存曾短时指向旧 IP；早期指定新 IP 的报告单独记录了解析覆盖条件，最终 `artifacts/website-online-verification.json` 是普通解析的结果。报告和 DNS 备份在忽略的 artifacts/ 中，服务器亦保留原 DNS 备份，凭据未提交。
+
+浏览器视觉、Windows/macOS 真实安装截图、干净 Chrome 安装与真实导出、国内多运营商网络仍待验收，详情见[开发计划的未完成验收](website-implementation-plan.md)。官网教程明确标注现有操作示意，不能将这些未执行项目报告为完成。
+
 ## 范围与当前证据
 
 本流程只操作 `www.instap.net` 的静态官网、独立发布目录与独立 Nginx 配置。DNS、证书和 Nginx 的初次配置由主 Agent 在核对后执行；部署脚本不会修改它们。生产凭据、私钥、账号文件不进入源码或静态产物。
@@ -11,7 +38,7 @@
 - 活跃 Nginx 配置为 `read-ai.instap.net`、`reports.instap.net`、`vellt.instap.net`，分别已有自己的证书；未找到 `www.instap.net` 或 `instap.net` 的活跃 server_name 或证书。read-ai 历史安装脚本包含主域，但现行配置已经使用 read-ai 子域，不应重新执行该旧脚本。
 - 本机只读公网 DNS 查询得到 `www.instap.net → 106.15.154.30`，裸域当次未返回地址。www 的公网 HTTP/TLS 请求超时；在 maru 上以 www Host 请求本机 Nginx 得到 404。以上均是部署前快照，不能当成上线结果。
 
-已确认网站联系邮箱为 `tzhu@instap.net`。只为 www 配置站点与证书；裸域没有解析，不能未经单独核对就将其加入证书申请。后续只读查询 maru 的阿里云元数据 `eipv4` 已直接确认其公网地址为 `47.116.75.216`，三个现有子域的 A 记录也均为此值。因此 www 当前 A 记录与 maru 不符，需要保存原 DNS 记录 ID/值/线路/TTL 后，只将 www A 更新到 `47.116.75.216`；本子任务尚未修改 DNS。元数据字段依据[阿里云 ECS 官方资料](https://help.aliyun.com/en/ecs/user-guide/view-instance-metadata/)，仅查询公开 IP 字段，不读取角色凭据。
+已确认网站联系邮箱为 `tzhu@instap.net`。只为 www 配置站点与证书；裸域没有解析，不能未经单独核对就将其加入证书申请。后续只读查询 maru 的阿里云元数据 `eipv4` 已直接确认其公网地址为 `47.116.75.216`，三个现有子域的 A 记录也均为此值。因此调查时 www A 记录与 maru 不符，实际发布时已在保存原记录后更正，结果见首节。元数据字段依据[阿里云 ECS 官方资料](https://help.aliyun.com/en/ecs/user-guide/view-instance-metadata/)，仅查询公开 IP 字段，不读取角色凭据。
 
 补充基线（同日只读）：Certbot 为 1.21.0，已有一个生产 Let’s Encrypt 账号，`certbot.timer` 已启用定期执行。以下为在 maru 上以 `--resolve 域名:443:127.0.0.1` 通过真实 TLS 校验取得的部署前结果，vellt 的现有 404 不能误判为本次回归失败：
 
@@ -74,23 +101,38 @@ sudo install -d -o tzhu -g www-data -m 0755 /var/www/instap.net /var/www/instap.
 # 本地：按下节 stage/activate 已提交版本；随后上传已审查的初始配置到临时文件。
 scp deploy/instap-http.nginx.conf tzhu@maru:/tmp/instap-http.nginx.conf
 # 服务器：确认目标尚不存在；若已存在，停止并审查/备份。
-sudo test ! -e /etc/nginx/sites-available/instap.net.conf
-sudo test ! -e /etc/nginx/sites-enabled/instap.net.conf
-sudo install -o root -g root -m 0644 /tmp/instap-http.nginx.conf /etc/nginx/sites-available/instap.net.conf
-sudo ln -s /etc/nginx/sites-available/instap.net.conf /etc/nginx/sites-enabled/instap.net.conf
+sudo test ! -e /etc/nginx/sites-available/instap.net
+sudo test ! -e /etc/nginx/sites-enabled/instap.net
+sudo install -o root -g root -m 0644 /tmp/instap-http.nginx.conf /etc/nginx/sites-available/instap.net
+sudo ln -s /etc/nginx/sites-available/instap.net /etc/nginx/sites-enabled/instap.net
 sudo nginx -t
 sudo systemctl reload nginx
 # 公开80及挑战路径验证可达后，才执行申请；仅申请www域，不改变其他vhost。
-sudo certbot certonly --webroot -w /var/www/instap.net/acme -d www.instap.net --email tzhu@instap.net --agree-tos --non-interactive
+sudo certbot certonly --webroot -w /var/www/instap.net/acme -d www.instap.net --cert-name www.instap.net --email tzhu@instap.net --keep-until-expiring --non-interactive
 # 本地：上传最终配置；服务器备份上述HTTP配置后，以最终配置替换此同名官网文件。
 scp deploy/instap.nginx.conf tzhu@maru:/tmp/instap.nginx.conf
 # 服务器：先检查签发后的实际证书名称与配置一致，再安装最终配置。
-sudo install -o root -g root -m 0644 /tmp/instap.nginx.conf /etc/nginx/sites-available/instap.net.conf
+sudo install -o root -g root -m 0644 /tmp/instap.nginx.conf /etc/nginx/sites-available/instap.net
 sudo nginx -t
 sudo systemctl reload nginx
 ```
 
-上述命令需逐步检查退出状态执行，`nginx -t` 失败时不得执行 reload。Certbot 若签发了带 `-0001` 的名称，应审查原因并将最终配置路径与实际证书匹配，不能猜测路径。证书签发与续期使用现有 Certbot 机制，完成后检查其 timer/cron 与新证书 webroot，不能只验证首次签发。
+上述命令使用已存在的 Certbot 账号，需逐步检查退出状态执行，`nginx -t` 失败时不得执行 reload。若需新注册账号，先由账号持有人处理相应协议。Certbot 若签发了带 `-0001` 的名称，应审查原因并将最终配置路径与实际证书匹配，不能猜测路径。证书签发与续期使用现有 Certbot 机制，完成后检查其 timer/cron 与新证书 webroot，不能只验证首次签发。
+
+### 续期后加载新证书
+
+Certbot 1.21 的 webroot `certonly` 配置仅续期磁盘文件，Nginx 还需重载才能使用新证书。`deploy/renew-instap-certificate.sh` 作为 root 所有、0755 的脚本安装到 `/etc/letsencrypt/renewal-hooks/deploy/50-instap-nginx-reload`。它只匹配 `/etc/letsencrypt/live/www.instap.net` 的 `RENEWED_LINEAGE`，先 `/usr/sbin/nginx -t`，通过后 `/usr/bin/systemctl reload nginx`；其他证书不触发。无需编辑其他证书、全局 cli.ini 或定时器。
+
+先审查、提交并推送脚本；初次安装应确认目标不存在，保留缺失状态供回退。分别执行：
+
+```sh
+# 续期演练：使用 staging CA，不替换现有生产证书。
+sudo certbot renew --cert-name www.instap.net --dry-run --non-interactive
+# 实际 hook 验证：先检查配置，然后温和重载 Nginx。
+sudo env RENEWED_LINEAGE=/etc/letsencrypt/live/www.instap.net /etc/letsencrypt/renewal-hooks/deploy/50-instap-nginx-reload
+```
+
+该版本的 dry-run 会跳过 deploy hook，不支持新版的 `--run-deploy-hooks`，因此两项结果必须分别记录；只看到续期命令退出 0 也不能代替 hook 输出和最终 TLS 验证。参见 [Certbot v1.21 命令说明](https://github.com/certbot/certbot/blob/v1.21.0/certbot/docs/cli-help.txt)。安装后还应验证 HTTP 的 ACME 路径直接返回挑战内容，并回归其他站点。回退此项仅移除本次新增的 hook，不修改其他续期任务。
 
 目录页的 `index.html` 内部跳转会命中 HTML location。ZIP 文件名不可复用为不同字节内容。部署版本目录保留旧包用于回退；若未来需要跨版本长期下载入口，构建时需显式带入旧版已验证 ZIP，不要默认 current 会包含所有历史包。
 
