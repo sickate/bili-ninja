@@ -1,6 +1,7 @@
 node_modules/
 .DS_Store
 artifacts/
+dist/
 *.zip
 
 # Local credentials, accounts, and development settings are never source assets.

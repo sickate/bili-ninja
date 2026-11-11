@@ -6,7 +6,7 @@
 
 下载界面显示在 Chrome 原生侧边栏，浏览视频时无需切换到新标签页。Bilibili 页面上的工具栏图标为粉色，其他网站为灰色且不可用。
 
-[隐私政策](PRIVACY.md) · [问题反馈](https://github.com/sickate/bili-ninja/issues) · [官网与推广计划](docs/promotion-plan.md)
+[产品官网](https://www.instap.net/bili-ninja/) · [隐私政策](PRIVACY.md) · [问题反馈](https://github.com/sickate/bili-ninja/issues) · [官网与推广计划](docs/promotion-plan.md)
 
 ## 安装
 
@@ -82,3 +82,19 @@ npm test
 打包：`npm run package`。工具栏 PNG 图标可用 `python3 scripts/generate-icons.py` 重新生成，无第三方依赖。
 
 `extension/` 是可独立加载的插件；`tests/` 仅用于开发，不需要安装到 Chrome。
+
+## Instap 官网
+
+`website/` 包含公司首页、Bili Ninja 产品页和安装教程；隐私正文从本仓库 `PRIVACY.md` 生成。官网 ZIP 安装应选择直接包含 `manifest.json` 的解压目录，与源码安装的 `extension/` 目录不同。公司联系邮箱为 `tzhu@instap.net`。
+
+```sh
+npm run build:website
+python3 scripts/verify-website.py --dist dist
+npm run preview:website
+```
+
+本地预览地址为 `http://127.0.0.1:4173`。构建产物在忽略的 `dist/`，包含同站图片、样式、脚本、版本化 ZIP 和 `release.json`；版本、大小及 SHA-256 自动取自实际发布包。打包使用固定文件元数据，避免文件修改时间改变相同源代码的 ZIP 校验值。
+
+来源参数通过站内产品链接显式传递到下载请求，允许五个 UTM 字段和受限字符，不使用 Cookie、本地存储或统计 SDK。访问与下载日志不代表安装或实际使用。Chrome 应用商店条目在真实公开链接确认前显示待上线。
+
+官网部署到 maru 的独立静态目录，与 read-ai 等站点分开；发布要求已提交、已推送的干净工作区，支持暂存、原子切换和回退。操作、验收范围与限制见[部署文档](docs/website-deployment.md)。

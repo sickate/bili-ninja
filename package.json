@@ -3,5 +3,10 @@
   "version": "1.2.1",
   "private": true,
   "type": "module",
-  "scripts": { "test": "node --test tests/*.test.js", "package": "python3 scripts/package.py" }
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "package": "python3 scripts/package.py",
+    "build:website": "npm run package && python3 scripts/build-website.py",
+    "preview:website": "python3 -m http.server 4173 --bind 127.0.0.1 --directory dist"
+  }
 }
