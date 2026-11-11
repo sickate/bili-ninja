@@ -15,6 +15,8 @@
 | www A | 已通过阿里云 CLI OAuth/API 从 `106.15.154.30` 更正为 `47.116.75.216`；原 default 线路、TTL 600 保留 |
 | DNS 验证 | maru 的权威响应包含 `aa` 且为新地址；最终本机普通 DNS 也已更新，无解析覆盖的线上验收通过 |
 | HTTPS | www 独立证书，SAN 仅 www.instap.net，到期时间 2027-02-09 14:49:25 UTC；TLS 校验未关闭 |
+| 自动续期 | Certbot timer active；www 的 staging 续期演练成功；独立 deploy hook 已实际检查配置并重载 Nginx，HTTP ACME 挑战路径已公网验证并清理 probe |
+| 续期 hook 提交 | `03c52a3`，root:root / 0755；服务器 SHA-256 与已推送文件一致；只匹配 www 证书 |
 | 扩展发布包 | v1.2.1，22,283 字节，SHA-256 `f35dd3c1542a266057ac3b24e46b4207059c84c10b0dbb8d08f235c9daf5a3ea` |
 | 下载地址 | `https://www.instap.net/downloads/bili-ninja/bili-ninja-1.2.1.zip` |
 | 线上校验 | 2026-11-11 16:06 UTC：五页及 14 项资源通过；实际 ZIP 内容、版本、大小、SHA-256、CRC 与本地扩展一致 |
@@ -22,10 +24,11 @@
 | 既有站点 | read-ai 200、reports 200、vellt 404，与部署前一致 |
 | 本地测试 | 扩展测试 22 通过、2 项真实样本跳过；来源传递/复制行为、隐私正文与发布回退检查通过 |
 | 远端 CI | GitHub 查询成功，该提交无 Actions 运行记录；未宣称 CI 通过 |
+| 桌面浏览器 | 原生 Chrome 已实看公司首页和产品首屏；实际页面的 ZIP、教程和产品链接均携带本次 UTM 参数 |
 
 本机原 DNS 缓存曾短时指向旧 IP；早期指定新 IP 的报告单独记录了解析覆盖条件，最终 `artifacts/website-online-verification.json` 是普通解析的结果。报告和 DNS 备份在忽略的 artifacts/ 中，服务器亦保留原 DNS 备份，凭据未提交。
 
-浏览器视觉、Windows/macOS 真实安装截图、干净 Chrome 安装与真实导出、国内多运营商网络仍待验收，详情见[开发计划的未完成验收](website-implementation-plan.md)。官网教程明确标注现有操作示意，不能将这些未执行项目报告为完成。
+手机视觉与复制交互、Windows/macOS 真实安装截图、干净 Chrome 安装与真实导出、国内多运营商网络仍待验收，详情见[开发计划的未完成验收](website-implementation-plan.md)。官网教程明确标注现有操作示意，不能将这些未执行项目报告为完成。
 
 ## 范围与当前证据
 
