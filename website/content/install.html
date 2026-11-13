@@ -1,5 +1,5 @@
 <section aria-labelledby="install-title">
-  <p class="notice"><strong>需要电脑和 Chrome 116 或更新版本。</strong>本页介绍官网 ZIP 的手动安装方式。Windows 和 macOS 的系统解压界面略有不同；下方步骤图为操作示意，并非实际安装截图。</p>
+  <p class="notice"><strong>需要电脑和 Chrome 116 或更新版本。</strong>本页介绍官网 ZIP 的手动安装方式。下方包含部分 macOS Finder 与 Chrome 实测截图（2026-11-12 与 2026-11-13，Bili Ninja v1.2.1）；Windows 截图尚待实测补充。这些截图展示对应步骤，不代表完整安装流程已验收。</p>
   <h2 id="install-title">从官网 ZIP 安装</h2>
   <p>下载包只包含扩展文件。安装前请把它解压到一个准备长期保留的位置；不要安装后再移动或删除该文件夹，否则 Chrome 可能无法继续加载扩展。</p>
   <p><a href="{{DOWNLOAD_URL}}" data-download>下载 Bili Ninja ZIP</a> <span>版本 {{VERSION}} · {{SIZE}} · 更新于 {{BUILD_DATE}}</span></p>
@@ -7,10 +7,15 @@
 
   <ol class="steps">
     <li>
-      <h3>下载 ZIP 并解压</h3>
+      <h3>下载官网 ZIP</h3>
+      <p>点击本页上方的下载按钮，保存 <code>bili-ninja-{{VERSION}}.zip</code>。下载完成后，继续解压 ZIP；Chrome 的“加载未打包的扩展程序”需要选择解压后的文件夹。</p>
+    </li>
+    <li>
+      <h3>解压 ZIP 并找到 manifest.json</h3>
       <p><strong>Windows：</strong>在下载的 ZIP 上点击右键，选择“全部提取…”，确认目标位置并提取。<br><strong>macOS：</strong>在 Finder 中双击 ZIP，系统归档工具会在旁边解压出文件夹。</p>
       <p>不同系统或解压工具可能会多套一层文件夹。打开解压结果，逐层查看，找到直接含有 <code>manifest.json</code> 的那一层；记住这个文件夹的位置。</p>
-      <figure class="step-illustration" aria-label="示意：解压后找到 manifest.json 所在文件夹"><div class="folder-tree"><span>选择此目录</span><span>├─ manifest.json</span><span>├─ audio.js</span><span>└─ 其他扩展文件</span></div><figcaption>示意：manifest.json、audio.js 等文件直接位于所选目录中。</figcaption></figure>
+      <figure class="install-screenshot"><a href="/assets/install/macos-zip-and-folder.jpg" target="_blank" rel="noopener"><img src="/assets/install/macos-zip-and-folder.jpg" alt="macOS Finder 列表中显示 bili-ninja-1.2.1.zip 和同目录下解压得到的 bili-ninja-1.2.1 文件夹" width="1840" height="1516" loading="lazy"></a><figcaption>macOS Finder 实测截图｜2026-11-13｜Finder 列表显示官网 ZIP 与同目录下解压得到的文件夹。<a href="/assets/install/macos-zip-and-folder.jpg" target="_blank" rel="noopener">查看原图</a></figcaption></figure>
+      <figure class="install-screenshot"><a href="/assets/install/macos-extracted-root.jpg" target="_blank" rel="noopener"><img src="/assets/install/macos-extracted-root.jpg" alt="macOS Finder 打开 bili-ninja-1.2.1 解压文件夹，manifest.json 与扩展文件直接位于这一层" width="1840" height="1516" loading="lazy"></a><figcaption>macOS Finder 实测截图｜2026-11-13｜<code>manifest.json</code> 与扩展文件直接位于解压目录中。<a href="/assets/install/macos-extracted-root.jpg" target="_blank" rel="noopener">查看原图</a></figcaption></figure>
     </li>
     <li>
       <h3>打开 Chrome 扩展程序页面</h3>
@@ -19,20 +24,32 @@
     </li>
     <li>
       <h3>打开开发者模式</h3>
-      <p>在扩展程序页面右上角打开“开发者模式”。页面会显示加载本地扩展的操作按钮。</p>
+      <p>在扩展程序页面右上角打开“开发者模式”。启用后，页面会显示“加载未打包的扩展程序”等操作按钮。</p>
+      <figure class="install-screenshot"><img src="/assets/install/chrome-developer-mode.jpg" alt="macOS Chrome 的 chrome://extensions 页面截图，右上角可找到开发者模式开关" width="2692" height="1502" loading="lazy"><figcaption>macOS Chrome 实测截图｜2026-11-12｜Bili Ninja v1.2.1。截图用于识别扩展程序页面和开发者模式入口；启用后再按页面显示的操作继续。</figcaption></figure>
     </li>
     <li>
-      <h3>选择“加载已解压的扩展程序”</h3>
-      <p>点击该按钮，在系统文件选择窗口中定位到刚才解压的位置。</p>
+      <h3>选择“加载未打包的扩展程序”</h3>
+      <p>部分 Chrome 版本会将同一操作显示为“加载已解压的扩展程序”。点击该按钮，在系统文件选择窗口中定位到刚才解压的位置。</p>
     </li>
     <li>
       <h3>选择 manifest.json 所在目录</h3>
-      <p>选择<strong>直接包含 <code>manifest.json</code> 的文件夹</strong>，然后确认。不要选择 ZIP 文件，也不要选择它的上一级目录。若系统解压后出现多层目录，继续打开，直到看到 <code>manifest.json</code> 再选择该层。</p>
+      <p>在文件选择窗口中选择<strong>直接包含 <code>manifest.json</code> 的文件夹</strong>，然后确认。不要选择 ZIP 文件，也不要选择它的上一级目录。若系统解压后出现多层目录，继续打开，直到看到 <code>manifest.json</code> 再选择该层。</p>
       <p class="notice">官网 ZIP 与 GitHub 源码的目录不同：官网 ZIP 选择其中直接含 <code>manifest.json</code> 的解压目录；若安装 GitHub 源码，则选择仓库里的 <code>extension/</code> 目录。</p>
+      <figure class="install-screenshot"><a href="/assets/install/chrome-select-folder.jpg" target="_blank" rel="noopener"><img src="/assets/install/chrome-select-folder.jpg" alt="macOS Chrome 选择扩展程序目录对话框，当前打开 bili-ninja-1.2.1 文件夹，manifest.json 等文件呈灰色且右下角有选择按钮" width="1760" height="896" loading="lazy"></a><figcaption>macOS Chrome 实测截图｜2026-11-13｜在“选择扩展程序目录”窗口中选中 <code>bili-ninja-1.2.1</code> 文件夹。文件呈灰色是因为此窗口选择的是文件夹；确认所选目录后点击“选择”。<a href="/assets/install/chrome-select-folder.jpg" target="_blank" rel="noopener">查看原图</a></figcaption></figure>
     </li>
     <li>
-      <h3>固定扩展并开始使用</h3>
-      <p>打开 Chrome 工具栏的扩展程序菜单，在 Bili Ninja 旁点击固定图钉。打开一个可以正常播放的普通 Bilibili BV 视频页，点击彩色的 Bili Ninja 图标即可在侧边栏操作。非 Bilibili 页面或首页等不支持页面不会启动导出。</p>
+      <h3>确认扩展已加载</h3>
+      <p>Chrome 返回扩展程序页面后，确认 Bili Ninja 卡片已出现且处于启用状态。</p>
+      <figure class="install-screenshot"><img src="/assets/install/chrome-installed.jpg" alt="macOS Chrome 扩展程序页面显示已加载的 Bili Ninja 音视频提取扩展，版本为 1.2.1，开发者模式已开启" width="2692" height="1502" loading="lazy"><figcaption>macOS Chrome 实测截图｜2026-11-12｜Bili Ninja v1.2.1。扩展卡片显示 Bili Ninja 音视频提取及版本 1.2.1。</figcaption></figure>
+    </li>
+    <li>
+      <h3>将扩展固定到工具栏</h3>
+      <p>打开 Chrome 工具栏的扩展程序菜单，在 Bili Ninja 旁点击固定图钉。</p>
+      <figure class="install-screenshot"><img src="/assets/install/chrome-pin-extension.jpg" alt="macOS Chrome 扩展程序菜单中的 Bili Ninja 音视频提取条目，右侧显示用于固定扩展的图钉图标" width="640" height="370" loading="lazy"><figcaption>macOS Chrome 实测截图｜2026-11-12｜Bili Ninja v1.2.1。扩展菜单中的图钉用于将 Bili Ninja 固定到工具栏。</figcaption></figure>
+    </li>
+    <li>
+      <h3>在 Bilibili 视频页打开侧边栏</h3>
+      <p>打开一个可以正常播放的普通 Bilibili BV 视频页，点击彩色的 Bili Ninja 图标即可在侧边栏操作。非 Bilibili 页面或首页等不支持页面不会启动导出。</p>
     </li>
   </ol>
 

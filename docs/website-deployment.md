@@ -24,11 +24,12 @@
 | 既有站点 | read-ai 200、reports 200、vellt 404，与部署前一致 |
 | 本地测试 | 扩展测试 22 通过、2 项真实样本跳过；来源传递/复制行为、隐私正文与发布回退检查通过 |
 | 远端 CI | GitHub 查询成功，该提交无 Actions 运行记录；未宣称 CI 通过 |
-| 桌面浏览器 | 原生 Chrome 已实看公司首页和产品首屏；实际页面的 ZIP、教程和产品链接均携带本次 UTM 参数 |
+| 原生 Chrome QA | 主 Agent 在未登录、无扩展的独立 Bili Ninja QA 资料中真实点击下载 ZIP，核验 v1.2.1 / 22,283 字节 / SHA-256 `f35dd3c1542a266057ac3b24e46b4207059c84c10b0dbb8d08f235c9daf5a3ea`；DevTools iPhone SE 375×667 模拟检查首页、产品页和教程，产品全页布局与移动安装提示正常。模拟视口不等于真实手机验收 |
+| 复制交互 | 产品页地址经真实按键复制并粘贴核对，含 `utm_source=qa&utm_medium=browser&utm_content=mobile`；教程 `chrome://extensions` 复制粘贴内容正确 |
 
 本机原 DNS 缓存曾短时指向旧 IP；早期指定新 IP 的报告单独记录了解析覆盖条件，最终 `artifacts/website-online-verification.json` 是普通解析的结果。报告和 DNS 备份在忽略的 artifacts/ 中，服务器亦保留原 DNS 备份，凭据未提交。
 
-手机视觉与复制交互、Windows/macOS 真实安装截图、干净 Chrome 安装与真实导出、国内多运营商网络仍待验收，详情见[开发计划的未完成验收](website-implementation-plan.md)。官网教程明确标注现有操作示意，不能将这些未执行项目报告为完成。
+DevTools 模拟视口的页面布局、移动安装提示及复制交互已通过上述检查；模拟视口不能作为真实手机验收。截图证据在忽略目录 `artifacts/browser-qa/`，包括首页、产品、教程、下载与 macOS 安装界面。2026-11-13 复核确认已有 v1.2.1 已启用扩展卡片、视频生成结果及两个单 P 保存文件，不能继续统称安装及导出“未执行”。两文件轨道、时长与完整解码已复验通过，但不独立证明浏览器全流程。真实多 P 保存与解码、干净配置完整流程、Windows、真实手机和多运营商验收仍待完成。历史上曾有开发者模式自动审批拒绝；当前阻塞为浏览器 host unavailable / 原生 Chrome `cgWindowNotFound`，本轮未尝试改变浏览器安全设置。证据边界和剩余项目见[开发计划的验收收尾](website-implementation-plan.md)及[收尾执行计划](qa-followup-plan.md)。
 
 ## 范围与当前证据
 
