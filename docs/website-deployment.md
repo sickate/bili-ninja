@@ -169,3 +169,13 @@ python3 scripts/verify-website.py --url https://www.instap.net --report artifact
 ```
 
 交付明确分别记录本地验证、Git 提交/推送、远端 CI、maru 发布、线上验收和浏览器安装/导出验收。任何未执行或受阻项目保持待验收状态。
+
+
+## 2026-11-13 实例与安装图文发布完成
+
+- 网站代码提交 `1967bd38a4a6e26d9d96ca40faabc3df09fc3f47` 已推送 origin/main，重新构建后发布到 `releases/20261113T074845Z-1967bd38a4a6`，current 已切换。
+- 发布前版本为 `20261111T144444Z-5adcf42d87e7`，保留可回退；本次未修改 DNS、Nginx 或证书。
+- 产品与首页采用已确认的三条原作者视频及封面；视频功能先于音频。安装指南现含六张真实 macOS 截图，保留解压并明确选择含 manifest.json 的目录。
+- 主 Agent 本地测试22通过、2真实样本测试跳过；构建与本地五页/23资源校验通过。Chrome 桌面及375×667模拟视口做了产品和教程抽查、首页实例入口检查；不代表真实手机或完整安装/导出验收。
+- 2026-11-13 08:01 UTC 公网HTTPS验证五页、23资源及ZIP版本/大小/SHA-256/CRC/内容通过，报告 `artifacts/website-online-final-20261113.json`。ZIP仍为v1.2.1、22,283字节，SHA-256 `f35dd3c1542a266057ac3b24e46b4207059c84c10b0dbb8d08f235c9daf5a3ea`。
+- GitHub Actions 查询 total_count=0，没有远端运行记录，不能报告CI通过。真实多P、三条实例导出、Windows及真实手机仍待实测；本轮教程复制粘贴复验缺口见 qa-followup-plan.md。
