@@ -57,7 +57,10 @@ def main():
         if clean in cache:
             return cache[clean]
         if args.url:
-            with urlopen(Request(origin + clean, headers={'User-Agent': 'Instap-release-verifier/1'}), timeout=20) as response:
+            request_path = clean
+            if clean.startswith('/downloads/bili-ninja/') and clean.endswith('.zip'):
+                request_path += '?utm_source=qa&utm_medium=release_verifier&utm_campaign=release_validation'
+            with urlopen(Request(origin + request_path, headers={'User-Agent': 'Instap-release-verifier/1'}), timeout=20) as response:
                 if response.status != 200:
                     raise ValueError('HTTP ' + str(response.status))
                 final = urlsplit(response.url)

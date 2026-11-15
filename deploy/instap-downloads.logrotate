@@ -1,0 +1,19 @@
+# Install as /etc/logrotate.d/instap-downloads after checking this path is not
+# covered by another rule. Never add /var/log/nginx/*.log here.
+/var/log/instap-downloads/downloads.jsonl {
+    daily
+    rotate 30
+    maxage 30
+    missingok
+    # Rotate empty logs too, so archives expire even when traffic stops.
+    ifempty
+    compress
+    delaycompress
+    create 0640 www-data adm
+    sharedscripts
+    postrotate
+        if /usr/bin/systemctl is-active --quiet nginx; then
+            /usr/sbin/nginx -s reopen
+        fi
+    endscript
+}
