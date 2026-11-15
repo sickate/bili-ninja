@@ -1,0 +1,11 @@
+[Unit]
+Description=Refresh public Instap ZIP request statistics every five minutes
+
+[Timer]
+OnCalendar=*:0/5
+Persistent=true
+AccuracySec=10s
+Unit=instap-download-stats.service
+
+[Install]
+WantedBy=timers.target

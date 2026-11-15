@@ -1,0 +1,44 @@
+<main id="main" class="stats-page" aria-labelledby="stats-title">
+  <div class="container">
+    <p class="eyebrow">Bili Ninja</p>
+    <h1 id="stats-title">下载请求统计</h1>
+    <p class="lead">这里公开官网 ZIP 下载接口的请求汇总，方便查看各渠道带来的请求变化。</p>
+    <div class="stats-notice"><p>以下为服务器收到的下载请求，测试请求单列。请求次数不等于下载人数或安装量。</p></div>
+    <div class="stats-status-row">
+      <p id="stats-status" class="stats-status" role="status" aria-live="polite">正在加载统计数据…</p>
+      <button id="stats-refresh" class="button button-secondary" type="button">刷新统计</button>
+    </div>
+    <p id="stats-updated" class="stats-meta">更新时间：尚未取得数据</p>
+    <p id="stats-window" class="stats-meta">统计窗口：等待数据</p>
+    <div id="stats-results" hidden>
+      <dl class="stats-cards">
+        <div><dt>下载请求（非测试）</dt><dd><span id="stats-total-get-200">—</span><p>非 QA · GET 200，正常返回文件的请求</p></dd></div>
+        <div><dt>分段请求（非测试）</dt><dd><span id="stats-total-get-206">—</span><p>分段请求，单次操作可能多段</p></dd></div>
+        <div><dt>请求失败（非测试）</dt><dd><span id="stats-total-failed">—</span><p>非 HEAD 的 HTTP 400–599 请求</p></dd></div>
+        <div><dt>测试请求</dt><dd><span id="stats-total-qa">—</span><p>标为 qa 的发布与功能验收请求</p></dd></div>
+      </dl>
+      <p id="stats-empty" hidden>该统计窗口内尚无符合以下口径的请求记录。零表示已成功读取日志，并非数据尚未加载。</p>
+      <div id="stats-table-wrap" class="stats-table-wrap" tabindex="0" role="region" aria-label="按日期及渠道的请求次数，可横向滚动">
+        <table class="stats-table">
+          <caption>按北京时间日期和固定渠道分组 · 单位：服务器请求次数</caption>
+          <thead><tr><th scope="col">日期</th><th scope="col">渠道</th><th scope="col">非 QA GET 200</th><th scope="col">非 QA GET 206</th><th scope="col">非 QA 失败</th><th scope="col">QA 请求</th></tr></thead>
+          <tbody id="stats-rows"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="stats-method">
+      <h2>统计说明</h2>
+      <p>记录始于北京时间 2026 年 11 月 15 日 16:15。只统计最近 30 个自然日内、启用后的记录；启用前的数据未知，不作历史累计。</p>
+      <p>GET 200 表示服务器正常返回文件，GET 206 表示分段返回。重试、机器人和中止可能产生额外请求；命中浏览器或代理缓存时，则不会收到新请求。</p>
+      <ul>
+        <li>服务器每 5 分钟尝试更新一次。更新失败时保留上次成功结果并提示错误；超过 15 分钟未成功更新时提示数据陈旧。</li>
+        <li>渠道只分为 X、小红书、微博、微信、哔哩哔哩、其他、未归因和 QA。渠道参数可被访客修改，不能证明真实来源；未归因也不等于自然流量。</li>
+        <li>QA 是来源参数标为 qa 的测试请求，按全部方法和状态汇总。非 QA 只是没有这一标记，不代表已排除全部测试或机器人。</li>
+        <li>非 QA 的 HEAD、重定向及其他状态不列入这四项指标。失败不包含 HEAD；分段请求不能与 GET 200 相加作为完整下载量。</li>
+        <li>公开数据只含日期、固定渠道和汇总计数，不含原始日志、任意推广参数、IP、UA 或访客资料。参见<a href="/bili-ninja/privacy/">隐私说明</a>。</li>
+      </ul>
+      <p><a href="/bili-ninja/">返回 Bili Ninja 产品页</a></p>
+    </div>
+    <noscript><p>请启用 JavaScript 查看最新统计，或直接查看<a href="/bili-ninja/stats/summary.json">公开汇总 JSON</a>。</p></noscript>
+  </div>
+</main>

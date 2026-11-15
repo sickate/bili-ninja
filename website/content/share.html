@@ -1,0 +1,30 @@
+<section class="wrap product-share" id="share" aria-labelledby="share-heading" data-product-share>
+  <div class="share-heading"><h2 id="share-heading">把 Bili Ninja 分享给朋友</h2><p>选一个平台，改好文案后再发送。</p></div>
+  <div class="share-channels" data-share-channels hidden aria-label="选择分享平台">
+    <button type="button" data-share-channel="x" aria-controls="share-editor" aria-expanded="false">X</button>
+    <button type="button" data-share-channel="xiaohongshu" aria-controls="share-editor" aria-expanded="false">小红书</button>
+    <button type="button" data-share-channel="weibo" aria-controls="share-editor" aria-expanded="false">微博</button>
+    <button type="button" data-share-channel="wechat" aria-controls="share-editor" aria-expanded="false">微信</button>
+  </div>
+  <div class="share-editor" id="share-editor" data-share-editor hidden>
+    <div class="share-editor-top"><h3 data-share-editor-heading tabindex="-1">准备分享</h3><button class="share-close" type="button" data-share-close>收起</button></div>
+    <p class="share-help" id="share-help" data-share-help></p>
+    <div data-share-title-group hidden><label for="share-title">笔记标题</label><input id="share-title" type="text" data-share-title autocomplete="off"><button type="button" class="share-copy-title" data-share-copy="title">复制标题</button></div>
+    <label for="share-text">分享文案（可编辑）</label>
+    <textarea id="share-text" rows="4" data-share-text aria-describedby="share-help"></textarea>
+    <label for="share-url">产品页链接</label>
+    <input id="share-url" type="url" data-share-url readonly>
+    <div class="share-actions">
+      <button type="button" data-share-copy="body">复制文案与链接</button>
+      <button type="button" data-share-copy="url">复制链接</button>
+      <a href="https://x.com/intent/tweet" target="_blank" rel="noopener noreferrer" data-share-composer hidden>打开发帖编辑页 ↗</a>
+      <button type="button" data-share-native hidden>系统分享</button>
+    </div>
+    <div class="share-materials" data-share-materials hidden><a href="/assets/screenshots/bili-ninja-video-quality-20261115.png" download="bili-ninja-screenshot.png">保存插件截图 ↓</a><p>复制标题和正文，保存截图后，在小红书中新建笔记并自行检查发布。</p></div>
+    <figure class="share-qr" data-share-qr hidden><div data-share-qr-image></div><figcaption>用微信扫一扫打开产品页；也可以复制文案发送给朋友。二维码在本页生成。</figcaption></figure>
+    <div class="share-manual" data-share-manual hidden><label for="share-manual-text">未能自动复制，请复制以下已选中的内容</label><textarea id="share-manual-text" rows="5" readonly data-share-manual-text></textarea></div>
+    <p class="share-status" role="status" aria-live="polite" data-share-status></p>
+    <p class="share-privacy">链接含平台来源标记，用于汇总下载请求。这里只准备分享材料，发布前由你确认。</p>
+  </div>
+  <noscript><p>可复制产品页地址：<a href="https://www.instap.net/bili-ninja/">https://www.instap.net/bili-ninja/</a>，或<a href="/assets/screenshots/bili-ninja-video-quality-20261115.png" download="bili-ninja-screenshot.png">保存插件截图</a>后分享。</p></noscript>
+</section>

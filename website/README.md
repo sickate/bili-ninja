@@ -15,3 +15,7 @@
 - 产品页实机截图 `website/assets/screenshots/bili-ninja-video-quality-20261115.png` 由用户于 2026-11-15 提供，原图为 B 站视频页与 Bili Ninja 完整视频清晰度菜单；页面展示可选项，不代表相关清晰度已成功导出。
 
 不通过 Sites 托管；生产部署与回退由仓库部署流程管理。
+
+- 官网公开统计页为 `/bili-ninja/stats/`，运行时 JSON 单独由 maru 的周期任务产生，不进入 dist。安装、口径与回退见 `docs/public-download-statistics.md`。
+- 分享组件由 `content/share.html` 与 `assets/share.js/css` 提供：本地生成四渠道文案及微信二维码，由用户复制或打开编辑页；不自动发帖。二维码库为 Project Nayuki MIT 原版，来源/哈希和许可保存在 assets/vendor/。
+- 首页中文改写依据与平台分享调查见 `docs/chinese-website-copy-notes.md`、`docs/website-sharing-research.md`。

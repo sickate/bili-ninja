@@ -14,7 +14,7 @@ from urllib.request import Request, urlopen
 from zipfile import ZipFile
 
 REPO = Path(__file__).resolve().parents[1]
-PAGES = ('/', '/bili-ninja/', '/bili-ninja/install/', '/bili-ninja/privacy/', '/bili-ninja/changelog/')
+PAGES = ('/', '/bili-ninja/', '/bili-ninja/install/', '/bili-ninja/privacy/', '/bili-ninja/changelog/', '/bili-ninja/stats/')
 
 class Document(HTMLParser):
     def __init__(self, text):
@@ -115,6 +115,9 @@ def main():
             if target.scheme != 'https':
                 errors.append(path + ': insecure internal link ' + link)
             target_path = target.path or '/'
+            # This exact endpoint is provided by Nginx at runtime, outside dist.
+            if not args.url and target_path == '/bili-ninja/stats/summary.json':
+                continue
             if target_path not in visited:
                 queue.append(target_path)
             if target.fragment and (target_path.endswith('/') or target_path.endswith('.html')):

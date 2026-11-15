@@ -2,6 +2,8 @@
 
 本方案只为 `www.instap.net` 版本化 ZIP 增加独立访问日志，不需要应用服务、Cookie、扩展遥测或第三方统计。配置和脚本存在于仓库不代表已部署；实际安装及验收由主 Agent 单独记录。
 
+官网受限公开汇总的接口、5 分钟生成任务、失败处理、权限、安装与回退见 [public-download-statistics.md](public-download-statistics.md)。私有脚本仍可按以下全部维度生成管理员报告；公开接口只输出经过另外一层固定字段及渠道白名单的滚动日期汇总，绝不直接公开本脚本的完整输出。
+
 ## 数据与归因边界
 
 `deploy/instap.nginx.conf` 在 `http` 上下文定义 Instap 专属 `map` 和 JSON `log_format`，仅 HTTPS ZIP location 写入 `/var/log/instap-downloads/downloads.jsonl`。该 location 的 `access_log` 覆盖继承的 combined 访问日志；其他页面和其他域名的既有日志配置不变。该专用文件只包含：
