@@ -36,3 +36,10 @@
 主 Agent 已复审 HTML/CSS 和素材：原图 SHA-256 为 `8f37015fa2fbb712543c8ceaefb6899df433a50134f51231f4e011c2b929e731`，构建产物图片与之相同；图片 2494×1534、1,864,201 字节。Chrome 桌面及 DevTools 375×752 模拟视口已目视检查截图、自然比例、图注和原图入口，未见裁切、拉伸或横向溢出；模拟视口不代表真实手机验收。
 
 本地构建与 verify 通过五页、24 项资源，报告 `artifacts/website-screenshot-local-20261115.json`；`git diff --check` 通过。扩展 ZIP 仍为 v1.2.1、22,283 字节，SHA-256 `f35dd3c1542a266057ac3b24e46b4207059c84c10b0dbb8d08f235c9daf5a3ea`。
+
+## 发布与线上验收结果
+
+- 网站提交 `5c56e38f35623c8e4c800f4b890cbb82c4c48a97` 已推送 origin/main；从该干净提交重建、stage 并 activate。生产 current 为 `releases/20261115T111934Z-5c56e38f3562`，回退点为 `20261115T081801Z-edbefc4e2856`。
+- 2026-11-15 19:21（Asia/Shanghai）普通公网 HTTPS 校验通过五页及24项资源，报告 `artifacts/website-screenshot-online-20261115.json`；新截图 HTTP 200 / image/png，2494×1534、1,864,201字节，SHA-256 及全部字节与用户原图一致。ZIP版本、大小、hash不变。
+- GitHub Actions 和本提交 check-runs 查询均 total_count=0；没有远端CI运行记录，未宣称CI通过。
+- 本轮未修改 DNS、Nginx、证书、下载计数配置或扩展代码。桌面及375×752模拟视口为本地构建预览的目视验收；公网检查验证了线上页面、资源及字节，不等于真实手机实测。

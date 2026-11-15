@@ -186,3 +186,8 @@ python3 scripts/verify-website.py --url https://www.instap.net --report artifact
 ## 下载统计发布（2026-11-15）
 
 代码 `edbefc4` 已推送，官网current切为 `releases/20261115T081801Z-edbefc4e2856`；回退点 `20261113T074845Z-1967bd38a4a6`。公开HTTPS五页、23资源及ZIP校验通过，v1.2.1包字节保持不变。下载专用日志与独立轮转已启用并通过真实请求和轮转后写入验收；备份 `/var/backups/instap-downloads-20261115T081541Z/`。只修改www配置；其他站点实测read-ai/reports 200、vellt既有404。GitHub Actions及本提交checks均无运行记录。完整口径、测试与回退见[本轮交付记录](download-promotion-plan.md)。
+
+
+## 2026-11-15 插件实机截图发布
+
+产品页首屏下新增用户提供的完整视频模式/清晰度菜单实机截图，含原图入口。网站提交 `5c56e38f35623c8e4c800f4b890cbb82c4c48a97` 已推送并发布至 `releases/20261115T111934Z-5c56e38f3562`；回退点 `20261115T081801Z-edbefc4e2856`。主 Agent 本地 Chrome 桌面及375×752模拟视口布局检查通过；19:21普通公网HTTPS五页、24资源及ZIP核验通过，新PNG与用户原图全字节一致。扩展仍为v1.2.1 / 22,283字节 / 原SHA-256；GitHub Actions及提交checks无运行记录。本轮未改Nginx、DNS、证书及下载统计。细节见[截图实施与验收记录](website-screenshot-plan.md)。
