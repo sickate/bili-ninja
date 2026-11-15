@@ -12,5 +12,6 @@
 - ZIP 路径为 `/downloads/bili-ninja/bili-ninja-<version>.zip`。扩展资源变化时应增加 manifest/package 版本，避免复用版本 URL。打包器固定文件排序、时间和权限，使相同输入的构建可重复。
 - `site.js` 只负责复制地址、移动设备提示与允许的 UTM 链接传递；不存储来源，不上报事件。来源只接受五个标准 utm 键，值为 1–80 个 ASCII 字母、数字或 `._~-`。下载链接显式携带这些参数；没有 JS 时仍可直接下载，但不会传递来源。
 - 产品示例封面位于 `website/assets/examples/`，程序生成的测试媒体演示来自仓库 `store/assets/`；安装实测截图位于 `website/assets/install/`。页面标注测试媒体演示，不暗示创作者背书。Chrome Web Store 未取得真实条目地址，显示禁用的待上线状态。
+- 产品页实机截图 `website/assets/screenshots/bili-ninja-video-quality-20261115.png` 由用户于 2026-11-15 提供，原图为 B 站视频页与 Bili Ninja 完整视频清晰度菜单；页面展示可选项，不代表相关清晰度已成功导出。
 
 不通过 Sites 托管；生产部署与回退由仓库部署流程管理。
