@@ -181,3 +181,8 @@ python3 scripts/verify-website.py --url https://www.instap.net --report artifact
 - 主 Agent 本地测试22通过、2真实样本测试跳过；构建与本地五页/23资源校验通过。Chrome 桌面及375×667模拟视口做了产品和教程抽查、首页实例入口检查；不代表真实手机或完整安装/导出验收。
 - 2026-11-13 08:01 UTC 公网HTTPS验证五页、23资源及ZIP版本/大小/SHA-256/CRC/内容通过，报告 `artifacts/website-online-final-20261113.json`。ZIP仍为v1.2.1、22,283字节，SHA-256 `f35dd3c1542a266057ac3b24e46b4207059c84c10b0dbb8d08f235c9daf5a3ea`。
 - GitHub Actions 查询 total_count=0，没有远端运行记录，不能报告CI通过。真实多P、三条实例导出、Windows及真实手机仍待实测；本轮教程复制粘贴复验缺口见 qa-followup-plan.md。
+
+
+## 下载统计发布（2026-11-15）
+
+代码 `edbefc4` 已推送，官网current切为 `releases/20261115T081801Z-edbefc4e2856`；回退点 `20261113T074845Z-1967bd38a4a6`。公开HTTPS五页、23资源及ZIP校验通过，v1.2.1包字节保持不变。下载专用日志与独立轮转已启用并通过真实请求和轮转后写入验收；备份 `/var/backups/instap-downloads-20261115T081541Z/`。只修改www配置；其他站点实测read-ai/reports 200、vellt既有404。GitHub Actions及本提交checks均无运行记录。完整口径、测试与回退见[本轮交付记录](download-promotion-plan.md)。

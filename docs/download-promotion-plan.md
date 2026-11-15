@@ -26,3 +26,15 @@
 - 代码通过后提交推送，查询远端 CI，从已推送提交构建并 stage/activate；记录发布前 current。带明确 qa 来源的实际下载验证日志及汇总，并与线上 ZIP 校验对应；报告生产自然流量与 QA 分开。
 - 回退：恢复备份的 www 配置并 nginx -t/reload；官网 rollback 到本轮发布前 release；保留日志；监测可通过进程/状态停止，截止后自动停止。
 - 交付区分本地测试、远端 CI、实际部署及评论提交/可见状态。监测须至少完成一次真实检查和间隔设置验证；网络失败不得标为新稿未发布。
+
+
+## 2026-11-15 实际交付记录
+
+- 主Agent完成源码复审；扩展测试22通过、2真实样本跳过；下载统计6项和监测11项通过；官网本地五页/23资源/ZIP通过。
+- `edbefc4e285670199978207d1a0332710ffcac4a` 已提交推送。GitHub Actions总运行数、该提交check runs均为0。
+- 官网发布至 `20261115T081801Z-edbefc4e2856`；回退点 `20261113T074845Z-1967bd38a4a6`。公网08:20:51 UTC五页/23资源/ZIP通过。首次线上校验site.js单次超时，完整重试通过，未将超时掩盖为首次通过。
+- Nginx与独立logrotate已安装，备份 `/var/backups/instap-downloads-20261115T081541Z/`；两次nginx -t通过后reload。专属轮转演练成功，新文件继续记录QA HEAD；每日logrotate.timer active。read-ai/reports为200、vellt为既有404，DNS/证书未改。
+- QA实测200/206/HEAD/404、非法/超长/重复/大小写重复/无等号重复/编码UTM均按约定清洗。轮转前后14条请求汇总无坏记录：GET200为3（均QA）、GET206为1、HEAD为9、失败为1；非QA GET200为0。统计起点为今日16:15启用之后，历史下载保持未知。
+- 服务器普通用户的 `instap-foyege-20261115.service` 已启动，脚本在 `/var/www/instap.net/operations/foyege-20261115/`，今日午夜自行停止；公开列表受限，状态blocked而非“未发布”。
+- 用户打开已登录Chrome后主Agent原生CUA核实投稿页，最新仍11月3日PV2；由原gpt-6.1-sol/high监测Agent继续每300秒真实刷新，并在主Agent审稿后接管今日新稿的一次评论执行。尚未发评论，不能声称已宣传。验证码、安全提示或内容不相关时须停在相应步骤并报告。
+- 私有验收报告：artifacts/website-downloads-local-20261115.json、website-downloads-online-20261115.json、download-qa-results-20261115.json、download-summary-20261115.json；不进入Git或公开网站。

@@ -4,6 +4,8 @@
 
 ## 原稿
 
-> 你好，我是 Bili Ninja 的维护者。如果你想把自己有权限观看的视频留作离线观看，可以在电脑 Chrome 里用 Bili Ninja 保存带声音的 MP4；处理在本机完成。官网提供 ZIP 下载和图文安装教程：https://www.instap.net/bili-ninja/?utm_source=bilibili&utm_medium=comment&utm_campaign=foyege_20261115&utm_content=<BV>
+> 我是 Bili Ninja 的维护者，给想在电脑上保存有声视频的朋友补充一个工具：在 Chrome 侧边栏可将自己有权保存的 B 站视频导出为带声音的 MP4，处理在本机完成。官网有 ZIP 下载和图文安装教程：https://www.instap.net/bili-ninja/?utm_source=bilibili&utm_medium=comment&utm_campaign=foyege_20261115&utm_content=<BV>
 
 该稿不表示已看过新视频，也不声称多 P 导出已验收。仅在确认内容相关、目标页面和链接正确后使用，并如实记录提交或可见状态。
+
+主Agent已于2026-11-15审查上述稿件，授权gpt-6.1-sol/high监测Agent在确认今日新稿作者、发布时间和内容适配后发布一次；需要用实际BV替换占位符。已登录Chrome可操作，16:19检查仍为11月3日PV2，尚未留言。验证码或安全提示交回用户。
