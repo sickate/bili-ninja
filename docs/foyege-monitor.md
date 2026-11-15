@@ -64,3 +64,12 @@ python3 -m unittest discover -s tests/python -p 'test_foyege_monitor.py' -v
 服务器备用只读服务 `instap-foyege-20261115.service` active，以tzhu运行；16:16:30与16:21:30两次真实检查间隔300秒，均明确记录投稿列表受限。今日午夜截止，普通HTTP检查不持有账号、不触发留言。
 
 用户打开已登录Chrome后，主Agent已通过原生CUA读取真实投稿页；16:17—16:19最新仍为11月3日BV1gg436JEbz，22视频。原Sol/high监测Agent正在按300秒继续刷新真实页面；浏览器检查与服务器API受限状态分别记录。主Agent已另行审查具体评论，授权该Agent只在发现今日新稿且适配时发布一次并保留本人界面证据，不能预先标记已留言。
+
+## 2026-11-15 新稿核查、留言与监测中断
+
+- 约 18:54，主 Agent 刷新真实 Chrome，发现作者 UID 1383971575 的新稿 BV1jHsp69Ekg《命运让他们彼此对立，也让他们彼此靠近｜上》；视频页显示发布时间 18:20:51。这里只记录页面核实到的标题、作者和发布时间，不据此声称完整观看视频。
+- 约 18:58 提交一条已审宣传评论；18:59 前在本人 sickate 页面看到“刚刚”的评论，输入框清空。没有评论 ID，也没有独立公开视角复核，故只能确认本人页面可见，不能称为全站可见。
+- 评论链接使用 `utm_source=bilibili&utm_medium=comment&utm_campaign=foyege_20261115&utm_content=BV1jHsp69Ekg`。平台将 BV 文本识别为站内视频链接，官网地址仍是纯文本。后续可按 campaign 观察请求；评论到官网的参数传递及逐 BV 归因尚未端到端验证。
+- 此前监测 Agent 最后一次成功刷新真实 Chrome 页面为 16:25。16:30、16:35、16:40 的 CUA 检查报告 `cgWindowNotFound`，Agent 随后遇到 HTTP 429 并停止。因此这不是连续有效的每五分钟页面监测，期间存在监测断档。
+- 服务器备用轮询曾按 300 秒执行，18:54 快照为 32 次检查中仅 1 次成功，公开 API 多数返回 blocked。API 轮询结果不能替代真实 Chrome 页面持续监测。主 Agent 于 19:00:15 停止备用发现任务；systemd 状态为 `ActiveState=inactive`、`SubState=dead`。
+- 18:54 服务器汇总：启用以来非 QA GET 200 为 0，QA GET 200 为 3。留言后约 19:00 再查，共 14 个请求、非 QA GET 200 为 0、QA GET 200 为 3，`foyege_20261115` 活动 rows 为空；尚无成功下载效果证据。活动刚开始，推广效果未知；请求量不代表独立访客、完整下载、安装或使用。
