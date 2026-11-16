@@ -122,14 +122,19 @@ def document(title, subtitle, body):
 
 
 page('/', 'Instap — 软件与硬件定制开发', 'Instap 提供软件和硬件的定制设计与开发服务，包括需求梳理、原型设计与产品开发。了解 Bili Ninja 音视频工具及项目合作方式。', (SOURCE / 'home.html').read_text())
-page('/bili-ninja/', 'Bili Ninja — 把声音留下，把画面带走', '在电脑 Chrome 侧边栏导出 B 站有声 MP4，将同一 BV 多个分 P 音频合并为 M4A。本机处理，开源、无遥测。', (SOURCE / 'product.html').read_text().replace('{{SHARE}}', (SOURCE / 'content/share.html').read_text()), '<link rel="stylesheet" href="/assets/share.css">\n<script defer src="/assets/vendor/qrcodegen.js"></script>\n<script defer src="/assets/share.js"></script>')
+product = ((SOURCE / 'product.html').read_text()
+           .replace('{{WEB_DOWNLOAD}}', (SOURCE / 'content/web-download.html').read_text())
+           .replace('{{SHARE}}', (SOURCE / 'content/share.html').read_text()))
+page('/bili-ninja/', 'Bili Ninja — B 站视频下载与音频提取', '粘贴 B 站视频链接，免插件生成 MP4 视频或 M4A 音频下载链接。另提供 Chrome 侧边栏插件，支持本机处理与多 P 音频合并。', product, '<link rel="stylesheet" href="/assets/share.css">\n<link rel="stylesheet" href="/assets/web-download.css">\n<script defer src="/assets/vendor/qrcodegen.js"></script>\n<script defer src="/assets/share.js"></script>\n<script defer src="/assets/web-download.js"></script>')
 page('/bili-ninja/stats/', '下载请求统计 — Bili Ninja', '查看官网插件包近30天的下载请求和渠道汇总，测试流量单独列出。', (SOURCE / 'content/stats.html').read_text(), '<link rel="stylesheet" href="/assets/stats.css">\n<script defer src="/assets/stats.js"></script>')
 install = SOURCE / 'content/install.html'
 if not install.is_file():
     raise SystemExit('Missing website/content/install.html')
 page('/bili-ninja/install/', '安装指南 — Bili Ninja', '从官网 ZIP 在 Windows 或 macOS 的 Chrome 中手动安装 Bili Ninja，了解首次使用和更新方法。', document('安装指南', '从下载到第一次导出。适用于官网 ZIP 安装，需使用电脑 Chrome 116+。', install.read_text()))
 privacy = markdown((ROOT / 'PRIVACY.md').read_text())
-privacy += '''<section class="site-privacy" aria-labelledby="site-privacy-title"><span class="eyebrow">官网访问说明 / WEBSITE</span><h2 id="site-privacy-title">关于这个网站</h2><p>以上政策适用于 Bili Ninja 扩展。本网站为静态官网，没有访客行为上报脚本、广告 SDK 或账号系统，不使用 Cookie 或本地存储进行来源追踪。</p>
+privacy += '''<section class="site-privacy" aria-labelledby="site-privacy-title"><span class="eyebrow">官网访问说明 / WEBSITE</span><h2 id="site-privacy-title">关于这个网站</h2><p>以上政策适用于 Bili Ninja 扩展。本网站提供产品资料及免插件网页下载，没有访客行为上报脚本、广告 SDK 或账号系统，不使用 Cookie 或本地存储进行来源追踪。</p>
+<h3>免插件网页下载</h3><p>主动提交视频链接后，本站服务器会接收该 URL、所选格式及请求 IP，向 Bilibili 请求匿名公开可播放的单个分 P，并临时下载、处理成 MP4 或 M4A 文件。此功能与扩展的本机处理方式不同，不需要也不接收你的 B 站登录凭据。所能获取的清晰度以匿名接口实际返回为准，不绕过付费、登录或试看权限。</p>
+<p>任务信息仅保存在服务内存中；成功文件和临时下载令牌在生成后 15 分钟过期并清理，失败文件随任务结束清理，服务重启也会清理缓存。下载链接具有随机令牌，任何持有链接的人在有效期内均可下载，请勿公开分享私密文件链接。视频 URL 通过 POST 正文提交，API 不记录请求正文、原始 URL、上游媒体签名或访问路径中的令牌；为限制滥用，仅在内存中短期维护按 IP 的请求频率。服务错误日志只含安全错误分类。Bilibili 会收到本站服务器的内容请求。请仅处理你有权保存的内容。</p>
 <p>网站由 Nginx 提供服务；服务器访问日志可能记录 IP 地址、访问时间、请求路径和查询参数、响应状态、User-Agent 及 Referer 等请求信息。请勿在网址参数中填写个人资料。扩展的「无遥测」承诺指扩展本身，不表示官网服务器没有访问日志。</p>
 <p>官网只接受 utm_source、utm_medium、utm_campaign、utm_content、utm_term 五个来源参数；每个值须为 1–80 个英文字母、数字或 . _ ~ - 字符。有效参数会显式附加到站内产品页面与 ZIP 下载链接，不写入扩展包。为评估推广效果，服务器会另行汇总 ZIP 下载请求的时间、版本、响应状态、请求方式、响应字节数，以及有效的来源、媒介、活动和内容标识；此专用统计日志不记录 IP、User-Agent、Referer 或完整查询参数，原始日志按日轮转并保留至多 30 份归档。测试来源单独列出。官网公开最近30个北京时间自然日内、统计启用后的下载请求汇总，只展示日期、固定渠道分类与计数，不公开原始日志或任意推广参数。维护者仍可查看受限的详细汇总。页面访问和 ZIP 请求只能表示请求，不能代表独立用户数、完整下载、安装成功或导出成功；浏览器缓存命中的下载可能不会请求服务器，因此不会计入。</p>
 <p>本站资源和 ZIP 均由本站提供。分享功能在浏览器中生成可编辑文案、带固定渠道标记的产品链接和二维码，不自动发布、不接入社交账号，也不向第三方发送媒体或二维码请求。点击 X 或微博编辑页后，会将当前文案与产品链接传给相应平台；使用系统分享时，内容交由你选择的应用处理。实际发布由你确认。主动点击第三方链接后，访问适用相应平台的隐私政策。如需询问官网日志管理或提出隐私问题，可联系 <a href="mailto:tzhu@instap.net">tzhu@instap.net</a>；扩展问题也可通过 <a href="https://github.com/sickate/bili-ninja/issues">GitHub Issues</a> 反馈。</p></section>'''

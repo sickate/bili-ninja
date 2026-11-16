@@ -1,5 +1,7 @@
 # Instap 静态官网
 
+产品页另提供免插件网页下载：`content/web-download.html` 与独立 `assets/web-download.js/css` 通过同站 `/api/bili-download/` 调用私有后台，生成短期 MP4/M4A 下载。此服务需要单独部署，不能只发布 dist；服务、安全边界与回退见 [实施计划](../docs/web-download-plan.md)。扩展仍在本机处理，网页下载由服务器处理，二者隐私说明分别标注。
+
 构建：`npm run build:website`。这会先打包扩展，核对 ZIP 内 manifest、版本和每个文件字节，再生成 `dist/`。只有 `extension/` 资源进入扩展 ZIP；网站资源与扩展包分别处理。没有安装依赖或外部运行时资源。
 
 本地预览：`npm run preview:website`，访问 `http://127.0.0.1:4173/`。完整路径需要通过 HTTP 预览，不要直接双击 HTML。部署只需发布 `dist/` 内容，并让 Web 服务按目录提供 index.html。

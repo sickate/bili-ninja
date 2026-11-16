@@ -85,6 +85,8 @@ npm test
 
 ## Instap 官网
 
+产品页支持粘贴普通 BV 视频 URL 或 b23.tv 短链接，选择 MP4 视频或 M4A 音频，由服务器临时生成可点击的下载链接，无需安装插件。每次处理 URL 指定的一个分 P，限匿名公开播放权限；文件生成后保留 15 分钟。后台与静态官网分别部署，实施、安全和验收见[网页下载计划](docs/web-download-plan.md)。
+
 `website/` 包含公司首页、Bili Ninja 产品页和安装教程；隐私正文从本仓库 `PRIVACY.md` 生成。官网 ZIP 安装应选择直接包含 `manifest.json` 的解压目录，与源码安装的 `extension/` 目录不同。公司联系邮箱为 `tzhu@instap.net`。
 
 ```sh

@@ -1,14 +1,15 @@
 <main id="main">
 <section class="wrap product-hero">
   <div class="product-label"><img src="/assets/bili-ninja.png" width="38" height="38" alt=""><span>Bili Ninja</span><span class="version-tag">v{{VERSION}}</span></div>
-  <div class="eyebrow">CHROME 侧边栏里的音视频工具</div>
+  <div class="eyebrow">B 站视频下载与音频提取</div>
   <h1>把画面带走。<br>把声音留下<span class="pink">。</span></h1>
   <div class="product-hero-bottom">
-    <p class="lead">喜欢的 B 站视频，存成有声音的 MP4。<br>想反复听的内容，留成一份 M4A。</p>
-    <div class="hero-actions"><a class="button dark" data-download href="{{DOWNLOAD_URL}}" download>下载插件 ZIP <span>↓</span></a><a class="text-link" href="/bili-ninja/install/">安装指南 <span>↗</span></a><p class="download-note">v{{VERSION}} · {{SIZE}} · Chrome 116+<br>需要手动安装 · 官网包更新于 {{BUILD_DATE}}</p></div>
+    <p class="lead">粘贴 B 站视频链接，下载有声音的 MP4，<br>或只保存一份 M4A 音频。</p>
+    <div class="hero-actions"><a class="button dark" href="#web-download">粘贴链接下载 <span>↓</span></a><a class="text-link" href="#download">下载 Chrome 插件 <span>↗</span></a><p class="download-note">网页下载无需安装插件。<br>需要沿用登录权限或合并多 P？可使用下方 Chrome 插件。</p></div>
   </div>
-  <div class="mobile-notice notice"><strong>请在电脑 Chrome 中安装</strong><p>当前扩展需要 Chrome 116 或更新版本。把此页地址复制到电脑，按安装指南操作。</p><button class="button small" type="button" data-copy-product>复制产品页地址 <span>↗</span></button></div>
+  <div class="mobile-notice notice"><strong>可直接使用下方网页下载</strong><p>Chrome 插件另需在电脑 Chrome 116+ 中安装；你也可以把此页地址复制到电脑。</p><button class="button small" type="button" data-copy-product>复制产品页地址 <span>↗</span></button></div>
 </section>
+{{WEB_DOWNLOAD}}
 <section class="wrap live-screenshot" aria-labelledby="live-screenshot-title">
   <div class="live-screenshot-heading"><span class="eyebrow">实机界面</span><h2 id="live-screenshot-title">在视频页，直接打开侧边栏</h2><p>完整视频模式与当前可选清晰度，显示在 B 站视频页旁。</p></div>
   <figure><a class="live-screenshot-image" href="/assets/screenshots/bili-ninja-video-quality-20261115.png" target="_blank" rel="noopener noreferrer"><img src="/assets/screenshots/bili-ninja-video-quality-20261115.png" width="2494" height="1534" alt="B 站视频页右侧打开 Bili Ninja 侧边栏，处于完整视频模式并展开可选视频清晰度菜单"></a><figcaption>实机界面截图；可选清晰度取决于视频和账号的播放权限。<a href="/assets/screenshots/bili-ninja-video-quality-20261115.png" target="_blank" rel="noopener noreferrer">查看原图 ↗</a></figcaption></figure>
@@ -42,8 +43,8 @@
     <figure><img src="/assets/screenshot-audio-1280x800.png" alt="音频模式的测试界面：勾选同一 BV 的两个分 P，合并并导出 M4A" width="1280" height="800" loading="lazy"><figcaption>功能界面演示，使用程序生成的测试媒体，并非上方课程的实际导出画面。</figcaption></figure>
   </div>
 </section>
-<section class="trust-band"><div class="wrap"><h2>处理在本机。<br>文件由你保管。</h2><div><p>无需上传媒体到开发者服务器，无广告、无遥测，也无需安装 FFmpeg。扩展沿用你已有的 B 站播放权限。</p><a class="text-link" href="/bili-ninja/privacy/">阅读隐私说明 <span>↗</span></a><a class="text-link" href="https://github.com/sickate/bili-ninja">查看开源代码 <span>↗</span></a></div></div></section>
-<section class="wrap limits"><div><span class="eyebrow">开始之前</span><h2>先确认，<br>适合你的用法。</h2></div><dl><div><dt>电脑 Chrome 116+</dt><dd>当前面向桌面 Chrome。其他浏览器尚未验证，不承诺兼容。</dd></div><div><dt>同一 BV 内合并音频</dt><dd>不合并不同 BV、UP 主合集或推荐列表；音轨采样率、声道和 AAC 配置需要一致。不直接输出 MP3。</dd></div><div><dt>只保存已有播放权限的内容</dt><dd>仅支持普通 BV 的独立 DASH 流及 H.264 视频；不支持直播、番剧、HEVC、AV1、DRM、FLV 或付费试看，不绕过权限限制。</dd></div><div><dt>留意大小与处理状态</dt><dd>单流上限 512 MB，单次导出合计上限 1 GB。处理时保持视频页和侧边栏打开，长内容可减少分 P 或降低清晰度。</dd></div></dl></section>
+<section class="trust-band"><div class="wrap"><h2>两种方式，<br>按需选择。</h2><div><p>网页下载由服务器临时生成文件，无需安装。Chrome 插件在本机处理，沿用你已有的 B 站播放权限，还支持将同一 BV 的多个分 P 音频合并。</p><a class="text-link" href="/bili-ninja/privacy/">阅读隐私说明 <span>↗</span></a><a class="text-link" href="https://github.com/sickate/bili-ninja">查看开源代码 <span>↗</span></a></div></div></section>
+<section class="wrap limits"><div><span class="eyebrow">Chrome 插件使用范围</span><h2>先确认，<br>适合你的用法。</h2></div><dl><div><dt>电脑 Chrome 116+</dt><dd>插件当前面向桌面 Chrome。其他浏览器尚未验证，不承诺兼容。</dd></div><div><dt>同一 BV 内合并音频</dt><dd>不合并不同 BV、UP 主合集或推荐列表；音轨采样率、声道和 AAC 配置需要一致。不直接输出 MP3。</dd></div><div><dt>只保存已有播放权限的内容</dt><dd>仅支持普通 BV 的独立 DASH 流及 H.264 视频；不支持直播、番剧、HEVC、AV1、DRM、FLV 或付费试看，不绕过权限限制。</dd></div><div><dt>留意大小与处理状态</dt><dd>插件单流上限 512 MB，单次导出合计上限 1 GB。处理时保持视频页和侧边栏打开，长内容可减少分 P 或降低清晰度。</dd></div></dl></section>
 <section id="download" class="download-section"><div class="wrap"><span class="eyebrow">把好内容，留一份</span><h2>从这里开始<span>↓</span></h2><div class="download-grid"><div><a class="button dark" data-download href="{{DOWNLOAD_URL}}" download>下载插件 ZIP <span>↓</span></a><p>版本 {{VERSION}} · {{SIZE}}（{{SIZE_BYTES}} 字节）<br>官网包更新于 {{BUILD_DATE}} · 需手动安装与更新</p><a class="text-link" href="/bili-ninja/install/">Windows / macOS 安装指南 ↗</a><details class="checksum"><summary>查看 SHA-256 校验值</summary><code>{{SHA256}}</code></details></div><div class="store-status"><span class="store-icon" aria-hidden="true">＋</span><strong>Chrome 应用商店</strong><p>待上线</p><button class="button disabled" disabled>商店条目尚未公开</button><p class="download-note">当前请使用本站 ZIP 安装。</p></div></div><p class="stats-link"><a class="text-link" href="/bili-ninja/stats/">查看下载统计 <span>↗</span></a></p><p class="share-row"><button class="text-link" type="button" data-copy-product>复制产品页地址 <span>↗</span></button></p><p class="muted download-footnote">仅下载、保存和使用你有权处理的内容。Bili Ninja 为独立开源项目，与 Bilibili 无隶属关系。</p></div></section>
 {{SHARE}}
 </main>

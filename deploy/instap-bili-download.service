@@ -1,0 +1,42 @@
+[Unit]
+Description=Instap anonymous Bilibili temporary downloads
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=instap-bili
+Group=instap-bili
+UMask=0077
+WorkingDirectory=/usr/local/lib/instap-bili-download/current
+ExecStart=/usr/bin/python3 -B /usr/local/lib/instap-bili-download/current/bili_download.py --state-dir /var/lib/instap-bili-download/cache --origin https://www.instap.net
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=10
+KillMode=control-group
+StateDirectory=instap-bili-download
+StateDirectoryMode=0700
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=true
+LockPersonality=true
+RestrictSUIDSGID=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+ReadOnlyPaths=/usr/local/lib/instap-bili-download
+ReadWritePaths=/var/lib/instap-bili-download
+MemoryMax=768M
+TasksMax=96
+LimitNOFILE=192
+LimitCORE=0
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

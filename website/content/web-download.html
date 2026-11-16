@@ -1,0 +1,16 @@
+<section id="web-download" class="wrap web-download" aria-labelledby="web-download-heading" data-web-download>
+  <div class="web-download-heading"><span class="eyebrow">网页下载 · 无需安装插件</span><h2 id="web-download-heading">粘贴视频链接，直接下载</h2><p>粘贴公开可播放的 B 站普通视频链接，生成临时下载文件。</p></div>
+  <form data-download-form novalidate>
+    <label for="web-download-url">B 站视频链接</label>
+    <input id="web-download-url" name="url" type="url" inputmode="url" autocomplete="url" placeholder="https://www.bilibili.com/video/BV…" required aria-describedby="web-download-help web-download-status" data-download-url>
+    <p class="web-download-help" id="web-download-help">支持 BV 视频链接（可指定 p 参数）和 b23.tv 短链接。每次处理一个分 P。</p>
+    <fieldset><legend>保存格式</legend><label><input type="radio" name="format" value="mp4" checked> 有声 MP4</label><label><input type="radio" name="format" value="m4a"> 仅音频 M4A</label></fieldset>
+    <button class="button dark" type="submit" data-download-submit>生成下载文件 <span aria-hidden="true">↓</span></button>
+  </form>
+  <div class="web-download-result" data-download-result hidden>
+    <p data-download-title></p><a class="button dark" data-download-link hidden>下载到本机 <span aria-hidden="true">↓</span></a><p class="web-download-expiry" data-download-expiry></p>
+  </div>
+  <p class="web-download-status" id="web-download-status" role="status" aria-live="polite" data-download-status></p>
+  <p class="web-download-privacy">匿名使用，无需登录或插件，清晰度以公开接口实际返回为准。每次处理一个分 P，单条音轨或画面流上限 256 MiB，最长等待与处理时间 4 分钟；不支持番剧、直播或付费试看。文件由服务器临时处理，成功后保留 15 分钟，请及时下载。</p>
+  <noscript><p>此工具需要启用 JavaScript 才能提交任务和生成临时文件。</p></noscript>
+</section>
