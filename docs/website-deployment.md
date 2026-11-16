@@ -191,3 +191,9 @@ python3 scripts/verify-website.py --url https://www.instap.net --report artifact
 ## 2026-11-15 插件实机截图发布
 
 产品页首屏下新增用户提供的完整视频模式/清晰度菜单实机截图，含原图入口。网站提交 `5c56e38f35623c8e4c800f4b890cbb82c4c48a97` 已推送并发布至 `releases/20261115T111934Z-5c56e38f3562`；回退点 `20261115T081801Z-edbefc4e2856`。主 Agent 本地 Chrome 桌面及375×752模拟视口布局检查通过；19:21普通公网HTTPS五页、24资源及ZIP核验通过，新PNG与用户原图全字节一致。扩展仍为v1.2.1 / 22,283字节 / 原SHA-256；GitHub Actions及提交checks无运行记录。本轮未改Nginx、DNS、证书及下载统计。细节见[截图实施与验收记录](website-screenshot-plan.md)。
+
+## 2026-11-16 免插件网页下载发布
+
+功能提交 `f70781e5b8eab322c1cd121f408faa35df093a23` 已推送并发布至 `releases/20261116T020518Z-f70781e5b8ea`，回退点 `20261115T125912Z-3b60eaf20c57`。www独立增加 `/api/bili-download/` 转发至127.0.0.1:9014；专用后台active/enabled，root所有的版本化源码、无登录运行账号、受限私有缓存。原配置与缺失状态备份 `/var/backups/instap-bili-20261116T020557Z/`。Nginx语法、服务、源码/配置哈希均验证；未改DNS/证书/其他站点。
+
+主 Agent 本地 npm测试40通过、2既有真实扩展fixture跳过；后台33项、统计16项、监测11项通过。真实公网任务生成并下载同一BV的完整H.264+AAC MP4和AAC M4A，约290秒，均完整解码无错；Origin/内网URL拒绝、附件/有效期及真实b23跳转通过。02:09 UTC官网六页、33资源及原v1.2.1 ZIP校验通过，统计timer正常，read-ai/reports200、vellt既有404。远端Actions/checks均无运行记录；浏览器工具unavailable/cgWindowNotFound，不能声称本轮界面可视或点击验收完成。具体安全边界、证据及回退见[网页下载实施与发布记录](web-download-plan.md)和[后台运维说明](../server/README.md)。

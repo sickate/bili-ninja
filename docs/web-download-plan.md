@@ -55,3 +55,16 @@
 - 浏览器连接服务 unavailable，原生 Chrome cgWindowNotFound；本轮未取得桌面/窄屏可视检查或浏览器点击下载证据，不能声称已完成此项。交互由节点模拟测试覆盖，最终文件由 HTTP/ffprobe/解码验证。
 - 发布前 current 为 releases/20261115T125912Z-3b60eaf20c57；www 配置 SHA256 9b6a0cf2d5ffa588eb55fb481e89fe81f9ba72ebf145b6e27246f70fe19b0fd2，与仓库原文件一致。后台目录、service、snippet、专用用户均不存在，9014未占用；nginx -t通过。
 - 最终资源默认值为缓存3GiB、额外磁盘预留512MiB、两处理线程+四名义等待位（受每任务1GiB预留约束，空缓存实际最多接纳3个）、每任务从提交到完成240秒。详见 [后台运维说明](../server/README.md)。
+
+## 生产发布与最终验收
+
+- 功能提交 `f70781e5b8eab322c1cd121f408faa35df093a23` 已推送 origin/main。从干净提交重新构建，官网发布目录 `releases/20261116T020518Z-f70781e5b8ea` 已激活；前版 `releases/20261115T125912Z-3b60eaf20c57` 保留可回退。
+- 后台源码安装在 `/usr/local/lib/instap-bili-download/releases/f70781e5b8eab322c1cd121f408faa35df093a23/`，current 指向该版本。专用无登录账号 instap-bili；服务 active/enabled，只监听127.0.0.1:9014。源码、unit、snippet、www配置 SHA256 与提交文件一致；生产ffmpeg4.4.2支持全部最终MOV安全参数。
+- Nginx原配置及缺失状态备份 `/var/backups/instap-bili-20261116T020557Z/`。独立service经systemd校验，www API snippet安装后nginx -t与reload通过；未改DNS、证书、邻居站点或统计timer。systemd校验出现既有snapd.service的RestartMode提示，不涉及本服务。
+- 普通公网HTTPS完成真实POST→轮询→附件下载：BV1bKnw6zEsV的M4A 4,457,485字节、AAC单轨、SHA256 `0a6d70d3dd6db7fb4c4846707aa0fcc39f7fba524d914a90623775c3f7833c64`；MP4 12,154,004字节、H.264+AAC、SHA256 `e3c8d165f72fed1c0a3e5e4198fe4de1cedb3b857f58a788e26aecd700f6f3be`。两文件约290.133333秒，完整解码退出0/错误0，attachment/MIME/no-store/15分钟有效期均核验。跨站Origin返回403，内网URL返回400。私有证据 `artifacts/web-download-online-media.json` 不含临时令牌/上游签名。
+- 服务器真实解析 `https://b23.tv/BV1bKnw6zEsV` 到对应BV的P1通过。真实常规BV下载已验证；并非所有视频、清晰度或分享短链均完成实测，上游限流/权限/过大内容会明确失败。
+- 在新表单公开前重启后台，清空本轮QA缓存及限流（实际缓存子目录0），复核health后启用开机启动，再激活网站；未将QA下载令牌交给用户。
+- 2026-11-16 02:09 UTC最终线上校验六页、33资源和v1.2.1原ZIP全部通过；产品表单/JS与公开health、stats JSON为200。read-ai/reports为200，vellt保持既有404。统计timer active。后台journal只见系统生命周期信息，没有原始URL/签名/令牌。
+- 远端GitHub Actions运行数0，本提交check-runs数0；没有CI结果，不能称CI通过。本地与公网功能验收通过，浏览器可视/点击验收仍因工具不可用待补。此前扩展多P、Windows和真实手机待办未被网页样本验收替代。
+
+具体回退：先按官网脚本rollback到 `20261115T125912Z-3b60eaf20c57`；恢复备份目录的instap.net至 `/etc/nginx/sites-available/instap.net`，nginx -t通过后reload；`systemctl disable --now instap-bili-download.service`。保留本次版本、备份和只读源码用于排查；若移除unit/snippet须仅移除本次新增项并daemon-reload，不删除统计、邻居站点或历史数据。
